@@ -12,11 +12,12 @@ def main():
             ejecutar = False
         else:
             departamento, municipio, cultivo, limite = ui.pedir_datos()
-            results_df = api.consultar_con_api(cliente, departamento, municipio, cultivo, limite)
+            results_df, ph_mediana, fosforo_mediana, potasio_mediana = api.consultar_con_api(cliente, departamento,
+                                                                                             municipio, cultivo, limite)
             if results_df.empty:
                 ui.mostrar_error(1)
             else:
-                respuesta = ui.mostrar_tabla(results_df)
+                respuesta = ui.mostrar_tabla(results_df, ph_mediana, fosforo_mediana, potasio_mediana)
                 if respuesta == "N":
                     ejecutar = False
 

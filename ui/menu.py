@@ -1,4 +1,3 @@
-import pandas as pd
 from tabulate import tabulate
 
 
@@ -36,13 +35,10 @@ def pedir_datos():
     return departamento, municipio, cultivo, limite
 
 
-def mostrar_tabla(results_df):
+def mostrar_tabla(results_df, ph_mediana, fosforo_mediana, potasio_mediana):
     respuesta = ""
     titulos = ["Departamento", "Municipio", "Cultivo", "Topografía", "Mediana de pH", "Mediana de fósforo",
                "Mediana de potasio"]
-    ph_mediana = pd.to_numeric(results_df["ph_agua_suelo_2_5_1_0"], errors='coerce').median()
-    fosforo_mediana = pd.to_numeric(results_df["f_sforo_p_bray_ii_mg_kg"], errors='coerce').median()
-    potasio_mediana = pd.to_numeric(results_df["potasio_k_intercambiable_cmol_kg"], errors='coerce').median()
 
     tabla_para_mostrar = [results_df["departamento"][0], results_df["municipio"][0], results_df["cultivo"][0],
                           results_df["topografia"][0], ph_mediana, fosforo_mediana, potasio_mediana]
@@ -52,4 +48,3 @@ def mostrar_tabla(results_df):
         if respuesta != "S" and respuesta != "s" and respuesta != "N" and respuesta != "n":
             mostrar_error(2)
     return respuesta.upper()
-
